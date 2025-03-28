@@ -1,0 +1,28 @@
+# Build and run from source
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: netscan-frontend
+    ports:
+      - "8089:80"
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - netscan-network
+
+
+  backend:
+    build: ./backend
+    container_name: netscan-backend
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - netscan-network
+
+
+networks:
+  netscan-network:
+    driver: bridge
