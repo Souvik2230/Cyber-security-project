@@ -1,0 +1,24 @@
+# Run from ghcr.io
+
+services:
+  frontend:
+    image: ghcr.io/securityphoton/nmap-gui-frontend:latest
+    container_name: netscan-frontend
+    ports:
+      - "8089:80"
+    depends_on:
+      - backend
+    networks:
+      - netscan-network
+
+  backend:
+    image: ghcr.io/securityphoton/nmap-gui-backend:latest
+    container_name: netscan-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - netscan-network
+
+networks:
+  netscan-network:
+    driver: bridge
